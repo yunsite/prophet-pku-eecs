@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-include_once('auth_config.php');
+include_once('auth_cfg.php');
 include_once('saetv2.ex.class.php');
 
 $o = new SaeTOAuthV2(WB_AKEY , WB_SKEY);
 
-$code_url = $o->getAuthorizeURL(WB_CALLBACK_URL);
+$code_url = $o -> getAuthorizeURL(WB_CALLBACK_URL);
 
 //This function will never fail, always return ok.
 $result = array("status" => "ok", "auth_url" => $code_url);
