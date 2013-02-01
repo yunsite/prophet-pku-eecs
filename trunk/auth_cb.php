@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once('auth_config.php');
+include_once('auth_cfg.php');
 include_once('saetv2.ex.class.php');
 
 $o = new SaeTOAuthV2(WB_AKEY, WB_SKEY);
