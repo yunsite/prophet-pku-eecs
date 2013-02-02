@@ -1,4 +1,11 @@
 <?php
+/**
+ * Auth URL
+ * 
+ * @author Taotaotheripper <taotaotheripper@gmail.com>
+ * @return {"status" : "ok", "auth_url" : "the auth url"}
+ */
+ 
 session_start();
 
 include_once('auth_cfg.php');
