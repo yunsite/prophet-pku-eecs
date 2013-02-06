@@ -40,4 +40,4 @@ define('COUNT_LIMIT', ((RATE_LIMIT / (3600 / REFRESH_PERIOD)) - 2) * 100);
  * COUNT_LIMIT: Only the latest COUNT_LIMIT statuses will be updated.
  * EXPIRE_TIME: Only the latest statues before in EXPIRE_TIME days will be stored.
  */
-?>
+ ?>

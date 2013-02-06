@@ -8,15 +8,25 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <script type="text/javascript">
 var req;
-var test_auth = "./auth_url.php"
-function test(test_url)
+function test_auth_url()
 {
+	test_url = "./auth_url.php";
 	$.getJSON(test_url, function(json) {
 		$("#test").append("<a href = \"" + json.auth_url + "\">" + "Click me!</a>");
 		alert(json.auth_url);
 	});
 }
-test(test_auth);
+function test_data_stat()
+{
+	test_url = "./data_stat.php";
+	$.getJSON(test_url, function(json) {
+		$("#test").append(json.top_statuses[0].text);
+		alert(json.top_statuses[0].text);
+	});
+}
+
+//test_auth_url();
+test_data_stat();
 </script>
 <div id="test"/>
 </body>

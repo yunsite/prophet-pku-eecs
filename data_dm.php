@@ -1,9 +1,9 @@
 <?php
-/*
-	Each blog(only source blog):
-	time + b_id + text + u_id + u_name + rep_cnt + cmt_cnt + att_cnt
-*/
-
+/**
+ * Automatically statuses fetching, updating and removing
+ * 
+ * @author Taotaotheripper <taotaotheripper@gmail.com>
+ */
 header("Content-Type: text/html; charset=utf-8");
 
 set_time_limit(0);
