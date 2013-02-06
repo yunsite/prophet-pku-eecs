@@ -15,6 +15,20 @@ include_once('auth_cfg.php');
 include_once('saetv2.ex.class.php');
 
 /*
+ * Get max status id current now
+ */
+function max_id($conn) {
+	//Format select
+	$sql = sprintf("select max(w_id) as max_id from %s", DB_TABLENAME);
+	if($result = mysql_query($sql, $conn)) {
+		//Only one record
+		$item = mysql_fetch_assoc($result);
+		return $item['max_id'];
+	} else
+		return 0;
+}
+ 
+/*
  * Judge whether a status is expired
  */
 function is_status_expired($date) {
@@ -145,12 +159,12 @@ $c = new SaeTClientV2(WB_AKEY , WB_SKEY , $_SESSION['token']['access_token']);
  * 	2. Expired statuses removing
  * 	3. Old statuses updating
  */
-$max_id = 0;
+//mysql_connect
+$conn = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("connect failed: " . mysql_error());
+mysql_select_db(DB_DATABASENAME, $conn);
+$max_id = max_id($conn);
 while(true) {
-	//mysql_connect
-	$conn = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("connect failed: " . mysql_error());
-	mysql_select_db(DB_DATABASENAME, $conn);
-
+	
 	$max_id = new_statuses_fetch($conn, $c, $max_id);
 	expired_statuses_remove($conn);
 	old_statuses_update($conn, $c);
@@ -158,6 +172,9 @@ while(true) {
 	mysql_close($conn);
 	
 	sleep(REFRESH_PERIOD);
+	
+	//mysql_connect
+	$conn = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("connect failed: " . mysql_error());
+	mysql_select_db(DB_DATABASENAME, $conn);
 }
-
 ?>
