@@ -829,6 +829,28 @@ class SaeTClientV2
 	}
 
 	/**
+	 * 批量获取指定微博的转发数评论数
+	 *
+	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/count statuses/count}
+	 *
+	 * @param string $ids 需要查询的微博ID，用半角逗号分隔，最多不超过100个。
+	 * @return array
+	 */
+	 function show_count_batch( $ids )
+	 {
+		$params=array();
+		if (is_array($ids) && !empty($ids)) {
+			foreach($ids as $k => $v) {
+				$this->id_format($ids[$k]);
+			}
+			$params['ids'] = join(',', $ids);
+		} else {
+			$params['ids'] = $ids;
+		}
+		return $this->oauth->get('statuses/count', $params);
+	}
+	 
+	/**
 	 * 通过微博（评论、私信）ID获取其MID
 	 *
 	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/querymid statuses/querymid}
